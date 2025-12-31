@@ -1,0 +1,32 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Django migrations cache
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
+
+# Database
+*.sqlite3
+
+# Logs
+*.log
+
+# Media va static fayllar
+media/
+staticfiles/
+
+# IDE va OS fayllari
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Maxfiy ma'lumotlar
+.env

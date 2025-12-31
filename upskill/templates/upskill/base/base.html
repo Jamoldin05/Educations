@@ -1,0 +1,345 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upskill - Online Education Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'upskill/img/logo.png' %}" rel="icon" type="image/png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'upskill/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'upskill/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+998 94 018 46 75 </small>
+                    <small class="px-3">|</small>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jhngrqayumov@gmail.com"
+                        target="_blank"
+                        style="text-decoration: none; color: inherit;">
+                            <small>jhngrqayumov@gmail.com</small>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{% url 'upskill:index' %}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Upskill</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="{% url 'upskill:index' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a>
+                    <a href="{% url 'upskill:about' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            Subjects
+                        </a>
+                        <div class="dropdown-menu m-0">
+                            {% for subject in subjects %}
+                                <a href="{% url 'upskill:subject_courses' subject.slug %}" 
+                                class="dropdown-item {% if request.path == '/subject/'|add:subject.slug|add:'/' %}active{% endif %}">
+                                    {{ subject.title }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <a href="{% url 'upskill:courses' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'courses' %}active{% endif %}">Courses</a>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{% url 'upskill:feature'%}" class="dropdown-item {% if request.path == '/feature.html' %}active{% endif %}">Our Features</a>
+                            <a href="{% url 'upskill:teachers'%}" class="dropdown-item {% if request.path == '/team.html' %}active{% endif %}">Instructors</a>
+                            <a href="{% url 'upskill:test'%}" class="dropdown-item {% if request.path == '/testimonial.html' %}active{% endif %}">Testimonial</a>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'upskill:contact' %}" class="nav-item nav-link {% if request.path == '/contact.html' %}active{% endif %}">Contact</a>
+                </div>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user:logout' %}" class="btn btn-danger py-2 px-4 d-none d-lg-block">Logout</a>
+                {% else %}
+                    <a href="{% url 'user:register_page' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+                {% endif %}
+
+                <style>
+                    nav {
+                        background-color: #4CAF50; 
+                        padding: 10px; 
+                    }
+                
+                    nav a {
+                        color: white; 
+                        text-decoration: none; 
+                        font-weight: bold;
+                    }
+                
+                    nav a:hover {
+                        text-decoration: underline; 
+                    }
+                </style>
+                
+
+                
+
+                
+                
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+       <!-- Header Start -->
+       <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">{%block mainPage%}{%endblock%}</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'upskill:index' %}">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <i class="fa fa-home pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">{%block variablePath%} {%endblock%}</p>
+            </div>
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+
+                <form action="{% url 'upskill:search' %}" method="get">
+                    <div class="input-group">
+
+                        <!-- Courses dropdown -->
+                        <div class="input-group-prepend dropdown">
+                            <button
+                                class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle"
+                                type="button"
+                                id="coursesDropdown"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                Courses
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="coursesDropdown">
+                                {% for course in courses %}
+                                    <a class="dropdown-item" href="{% url 'upskill:detail' course.slug %}">
+                                        {{ course.title }}
+                                    </a>
+                                {% empty %}
+                                    <span class="dropdown-item disabled">
+                                        Hozircha kurslar mavjud emas
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Search input -->
+                        <input
+                            type="text"
+                            name="q"
+                            class="form-control border-light"
+                            style="padding: 30px 25px;"
+                            placeholder="Keyword"
+                            required
+                        >
+
+                        <!-- Search button -->
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary px-4 px-lg-5">
+                                Search
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Header End --> 
+
+
+    {% block index_content %}
+    {% endblock %}
+
+    {% block about_content %}
+    {% endblock %}
+
+    {% block course_content %}
+    {% endblock %}
+
+    {% block course_detail %}
+    {% endblock %}
+
+    {% block subject_content %}
+    {%endblock%}
+
+    {% block contact_content %}
+    {%endblock%}
+
+    {% block feature_content %}
+    {%endblock%}
+
+    {% block team_content %}
+    {%endblock%}
+
+    {% block test_content %}
+    {%endblock%}
+
+    {% block search_content %}
+    {%endblock%}
+
+    <!-- Footer Start -->
+    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <a href="upskill:index.html" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Upskill</h1>
+                    </a>
+                    <p class="m-0">Upskill — bu sizning bilim va ko‘nikmalaringizni onlayn tarzda rivojlantirish uchun mo‘ljallangan zamonaviy ta’lim platformasi.</p>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-white mb-4">Newsletter</h3>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Get In Touch</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Najot+Ta'lim+Xadra+filiali,+Tashkent"
+                    target="_blank"
+                    style="text-decoration: none; color: inherit; display:block; margin-bottom:15px;">
+                        <small style="font-size:20px;">Najot Ta'lim Xadra filiali, Tashkent</small>
+                    </a> 
+
+                    <p style="font-size:20px; margin-bottom:15px;">
+                        <i class="fa fa-phone-alt mr-2"></i>+998 94 018 46 75
+                    </p>
+
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jhngrqayumov@gmail.com"
+                    target="_blank"
+                    style="text-decoration: none; color: inherit; display:block; margin-bottom:15px;">
+                        <small style="font-size:20px;">jhngrqayumov@gmail.com</small>
+                    </a>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-twitter"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-facebook-f"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-linkedin-in"></i></a>
+                        <a class="text-white" href="#"><i class="fab fa-2x fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Our Courses</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Web Design</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Apps Design</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Marketing</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Research</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>SEO</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy Policy</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Terms & Condition</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Regular FAQs</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help & Support</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white-50 border-top py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0">Copyright &copy; <a class="text-white" href="#">Your Site Name</a>. All Rights Reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <p class="m-0">Designed by <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'upskill/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'upskill/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'upskill/lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'upskill/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'upskill/js/main.js' %}"></script>
+</body>
+
+</html>
+
+

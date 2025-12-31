@@ -1,0 +1,63 @@
+
+
+{% extends 'upskill/base/base.html' %}
+{% load static %}
+
+{%block mainPage%}
+    Search
+{%endblock%}
+
+{%block variablePath%} Search {%endblock%}
+
+
+{% block search_content %}
+
+
+<div class="container py-5">
+
+    <!-- Search title -->
+    <div class="mb-4">
+        {% if request.GET.q %}
+            <h3>
+                “{{ request.GET.q }}” bo‘yicha qidiruv natijalari
+            </h3>
+        {% else %}
+            <h3>Qidiruv</h3>
+        {% endif %}
+    </div>
+
+    <!-- Results -->
+    {% if courses %}
+        <div class="row">
+            {% for course in courses %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+
+                        <img src="{{ course.image.url }}"
+                             class="card-img-top"
+                             alt="{{ course.title }}">
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ course.title }}
+                            </h5>
+
+                            <a href="{% url 'upskill:detail' course.slug %}"
+                               class="btn btn-primary btn-sm">
+                                Batafsil
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            Hech qanday kurs topilmadi.
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
